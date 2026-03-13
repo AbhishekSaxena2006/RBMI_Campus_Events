@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Signup - RBMI Events</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <style>
+    .eye-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0.7;
+    }
+    .input-wrap {
+      position: relative;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand-wrap">
+    <img src="./assets/images/logo.png" alt="Logo">
+    <h2>RBMI Campus Events</h2>
+  </div>
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./events.html">Events</a>
+    <a href="./about.html">About</a>
+    <a id="nav-sign" href="./signup.html" class="active">Sign Up</a>
+    <a id="nav-login" href="./login.html">Login</a>
+  </nav>
+</header>
+
+<div class="top-accent"></div>
+
+<section class="content">
+  <div class="form-card">
+    <h2 style="text-align:center;">Sign Up / Event Registration</h2>
+
+    <form id="signupForm">
+
+      <!-- NAME -->
+      <label for="name">Name</label>
+      <input id="name" required oninput="validateName()" />
+      <small id="nameError" style="color:#c62828; display:none;">
+        Only alphabets are allowed
+      </small>
+
+      <!-- EMAIL -->
+      <label for="email">Email</label>
+      <input id="email" type="email" required />
+      <small id="emailError" style="color:#c62828; display:none;">
+        Allowed domains: gmail.com, rbmi.in, rbmi.com, outlook.com
+      </small>
+
+      <!-- DEPARTMENT -->
+      <label for="dept">Department</label>
+      <select id="dept" required>
+        <option value="">Select</option>
+        <option>B.Tech</option>
+        <option>BCA</option>
+        <option>BBA</option>
+        <option>B.Com</option>
+      </select>
+
+      <!-- EVENT -->
+      <label for="event">Event</label>
+      <select id="event" required>
+        <option value="">Choose event</option>
+        <option>Tech Fest</option>
+        <option>Sports Meet</option>
+        <option>Cultural Fest</option>
+      </select>
+
+      <!-- PASSWORD -->
+      <label for="pwd">Password</label>
+      <div class="input-wrap">
+        <input id="pwd" type="password" minlength="6" required />
+        <span class="eye-btn" onclick="togglePwd('pwd', this)">👁</span>
+      </div>
+
+      <!-- CONFIRM PASSWORD -->
+      <label for="pwd2">Confirm Password</label>
+      <div class="input-wrap">
+        <input id="pwd2" type="password" minlength="6" required />
+        <span class="eye-btn" onclick="togglePwd('pwd2', this)">👁</span>
+      </div>
+
+      <button type="submit">Sign Up</button>
+      <p id="signupMsg" style="color:#0a3d62; margin-top:8px;"></p>
+
+      <p style="margin-top:10px">
+        Already have an account? <a href="./login.html">Login</a>
+      </p>
+
+    </form>
+
+  </div>
+</section>
+
+<footer>© 2025 RBMI | Campus Events Portal</footer>
+
+
+<!-- CUSTOM VALIDATION JS -->
+
+<script>
+/* NAME VALIDATION */
+function validateName() {
+  let nameInput = document.getElementById("name");
+  let error = document.getElementById("nameError");
+
+  let original = nameInput.value;
+  let cleaned = original.replace(/[^A-Za-z ]/g, "");
+
+  if (original !== cleaned) {
+    error.style.display = "block";
+  } else {
+    error.style.display = "none";
+  }
+
+  nameInput.value = cleaned;
+}
+
+/* EMAIL DOMAIN VALIDATION */
+const allowedDomains = ["gmail.com", "rbmi.in", "rbmi.com", "outlook.com"];
+const emailInput = document.getElementById("email");
+const emailError = document.getElementById("emailError");
+
+emailInput.addEventListener("input", () => {
+    let email = emailInput.value.trim().toLowerCase();
+    if (!email.includes("@")) {
+        emailError.style.display = "none";
+        emailInput.dataset.valid = "false";
+        return;
+    }
+    let domain = email.split("@")[1];
+    let ok = allowedDomains.includes(domain);
+    emailInput.dataset.valid = ok ? "true" : "false";
+    emailError.style.display = ok ? "none" : "block";
+});
+
+/* STOP SUBMIT IF EMAIL INVALID */
+document.getElementById("signupForm").addEventListener("submit", function(e){
+    if (emailInput.dataset.valid !== "true") {
+        e.preventDefault();
+        emailError.style.display = "block";
+        return false;
+    }
+});
+</script>
+
+
+<!-- PASSWORD SHOW/HIDE -->
+
+<script>
+function togglePwd(id, eyeIcon) {
+  let input = document.getElementById(id);
+
+  if (input.type === "password") {
+      input.type = "text";
+      eyeIcon.textContent = "👁‍🗨";  // open eye
+  } else {
+      input.type = "password";
+      eyeIcon.textContent = "👁";    // closed eye
+  }
+}
+</script>
+
+
+<!-- AUTH SYSTEM -->
+<script src="./assets/js/auth.js"></script>
+
+</body>
+</html>

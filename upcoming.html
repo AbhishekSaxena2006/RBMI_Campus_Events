@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upcoming Events - RBMI</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+  <style>
+    .event-row {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .event-card {
+      background: #fff;
+      flex: 1;
+      min-width: 48%;
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 230px;       
+      object-fit: cover;   
+      border-radius: 10px;
+      background: #f2f2f2;
+    }
+
+    .event-card h4 {
+      margin: 10px 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0a3d62;
+    }
+
+    .event-card p {
+      font-size: 14px;
+      color: #444;
+    }
+  </style>
+
+<header>
+  <div class="brand-wrap">
+    <img src="./assets/images/logo.png" alt="Logo">
+    <h2>RBMI Campus Events</h2>
+  </div>
+
+  <nav>
+  <a href="./index.html">Home</a>
+  <a href="./events.html">Events</a>
+  <a href="./about.html">About</a>
+
+  <a id="nav-sign" href="./signup.html">Sign Up</a>
+  <a id="nav-login" href="./login.html">Login</a>
+</nav>
+
+</header>
+
+<div class="top-accent"></div>
+
+<section class="content">
+  <h2>Upcoming Events</h2>
+
+  <div class="event-grid">
+
+    <div class="event-card">
+      <img src="./assets/images/roadshow.jpg">
+      <h4>Road Show 2025</h4>
+      <p>Technical competitions, robotics & coding contests.</p>
+    </div>
+
+    <div class="event-card">
+      <img src="./assets/images/farewell2026.png">
+      <h4>Farewell 2026</h4>
+      <p>Inter-department tournament & athletics events.</p>
+    </div>
+
+    <div class="event-card">
+      <img src="./assets/images/freshvibe2026.jpg">
+      <h4>FreshVibe 2026 </h4>
+      <p>Welcome program for new students.</p>
+    </div>
+
+    <div class="event-card">
+      <img src="./assets/images/momentum.jpg">
+      <h4>Momentum 2026</h4>
+      <p>Projects displayed by student.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>© 2025 RBMI | Campus Events Portal</footer>
+<script src="./assets/js/auth.js"></script>
+
+</body>
+</html>

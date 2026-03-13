@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - RBMI Events</title>
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <style>
+    .eye-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0.7;
+      user-select: none;
+    }
+    .input-wrap {
+      position: relative;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand-wrap">
+    <img src="./assets/images/logo.png" alt="Logo">
+    <h2>RBMI Campus Events</h2>
+  </div>
+  <nav>
+      <a href="./index.html">Home</a>
+      <a href="./events.html">Events</a>
+      <a href="./about.html">About</a>
+      <a id="nav-sign" href="./signup.html">Sign Up</a>
+      <a id="nav-login" href="./login.html" class="active">Login</a>
+  </nav>
+</header>
+
+<div class="top-accent"></div>
+
+<section class="content">
+  <div class="form-card">
+    <h2 style="text-align:center;">Login to Your Account</h2>
+
+    <form id="loginForm">
+<!----email-->
+      <label for="emailL">Email</label>
+<input id="emailL" type="email" required />
+<small id="emailErrorL" style="color:#c62828; display:none;">
+  Allowed domains: gmail.com, rbmi.in, rbmi.com, outlook.com
+</small>
+
+
+      <label for="pwdL">Password</label>
+      <div class="input-wrap">
+        <input id="pwdL" type="password" required />
+        <span class="eye-btn" onclick="togglePwd('pwdL', this)">👁</span>
+      </div>
+
+      <button type="submit">Login</button>
+
+      <p id="loginMsg" style="color:#c62828;margin-top:10px"></p>
+      <p style="margin-top:10px">Not registered? <a href="./signup.html">Sign Up</a></p>
+
+    </form>
+  </div>
+</section>
+
+<footer>© 2025 RBMI | Campus Events Portal</footer>
+
+<script>
+function togglePwd(id, eye){
+    const field = document.getElementById(id);
+    if(field.type === "password"){
+        field.type = "text";
+        eye.textContent = "👁‍🗨";
+    } else {
+        field.type = "password";
+        eye.textContent = "👁";
+    }
+}
+</script>
+
+<script src="./assets/js/auth.js"></script>
+</body>
+</html>
