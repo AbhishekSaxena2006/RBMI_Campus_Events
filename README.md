@@ -1,4 +1,3 @@
-# RBMI_Campus_Events
 # RBMI Campus Events Website
 
 This project is a simple frontend website created for displaying college events of RBMI (Rakshpal Bahadur Management Institute).
