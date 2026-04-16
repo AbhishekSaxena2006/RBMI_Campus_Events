@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Events</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<h2 style="text-align:center;">Add Event</h2>
+
+<div style="width:300px; margin:auto;">
+  <input id="eventName" placeholder="Event Name"><br><br>
+  <input id="eventDesc" placeholder="Description"><br><br>
+  <button onclick="addEvent()">Add Event</button>
+</div>
+
+<script>
+async function addEvent(){
+  const name = document.getElementById("eventName").value;
+  const description = document.getElementById("eventDesc").value;
+
+  await fetch("http://127.0.0.1:5000/add-event", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ name, description })
+  });
+
+  alert("Event Added");
+}
+</script>
+
+</body>
+</html>

@@ -23,6 +23,10 @@
 
   <a id="nav-sign" href="./signup.html">Sign Up</a>
   <a id="nav-login" href="./login.html">Login</a>
+
+  <!---ADMIN BUTTONS -->
+  <a id="admin-events" href="admin-events.html" hidden>Manage Events</a>
+<a id="admin-data" href="admin-dashboard.html" hidden>View Registrations</a>
 </nav>
 
 </header>
@@ -80,5 +84,12 @@
 </footer>
 
 <script src="../assets/js/auth.js"></script>
+
+<script>
+if(localStorage.getItem("role") === "admin"){
+  document.getElementById("admin-events").hidden = false;
+  document.getElementById("admin-data").hidden = false;
+}
+</script>
 </body>
 </html>

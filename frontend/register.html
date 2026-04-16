@@ -21,6 +21,9 @@
       <a href="./about.html">About</a>
       <a id="nav-sign" href="./signup.html">Sign Up</a>
       <a id="nav-login" href="./login.html">Login</a>
+      <!---ADMIN BUTTONS -->
+  <a id="admin-events" href="admin-events.html" hidden>Manage Events</a>
+<a id="admin-data" href="admin-dashboard.html" hidden>View Registrations</a>
   </nav>
 </header>
 
@@ -86,6 +89,13 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     document.getElementById("msg").textContent = "Error aa gaya";
   }
 });
+</script>
+
+<script>
+if(localStorage.getItem("role") === "admin"){
+  document.getElementById("admin-events").hidden = false;
+  document.getElementById("admin-data").hidden = false;
+}
 </script>
 
 </body>

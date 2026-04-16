@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registrations</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<h2 style="text-align:center;">All Registrations</h2>
+
+<table border="1" width="100%" id="table">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Event</th>
+  </tr>
+</table>
+
+<script>
+async function loadData() {
+  const res = await fetch("http://127.0.0.1:5000/get-registrations");
+  const data = await res.json();
+
+  const table = document.getElementById("table");
+
+  data.forEach(item => {
+    table.innerHTML += `
+      <tr>
+        <td>${item[1]}</td>
+        <td>${item[2]}</td>
+        <td>${item[3]}</td>
+        <td>${item[4]}</td>
+      </tr>
+    `;
+  });
+}
+
+loadData();
+</script>
+
+</body>
+</html>

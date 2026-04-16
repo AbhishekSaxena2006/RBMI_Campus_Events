@@ -36,6 +36,10 @@
       <a href="./about.html">About</a>
       <a id="nav-sign" href="./signup.html">Sign Up</a>
       <a id="nav-login" href="./login.html" class="active">Login</a>
+
+      <!---ADMIN BUTTONS -->
+  <a id="admin-events" href="admin-events.html" hidden>Manage Events</a>
+<a id="admin-data" href="admin-dashboard.html" hidden>View Registrations</a>
   </nav>
 </header>
 
@@ -87,9 +91,16 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const result = await res.json();
 
     if (result.role === "admin") {
-      localStorage.setItem("role", "admin");
-      window.location.href = "admin.html";
-    } else {
+  localStorage.setItem("role", "admin");
+
+  // 🔥 ye add kar
+  localStorage.setItem("rbmi_current_user", JSON.stringify({
+    name: "Admin",
+    email: email
+  }));
+
+  window.location.href = "index.html";
+} else {
       document.getElementById("loginMsg").textContent = "Invalid Credentials";
     }
 
@@ -111,6 +122,13 @@ function togglePwd(id, eye){
         field.type = "password";
         eye.textContent = "👁";
     }
+}
+</script>
+
+<script>
+if(localStorage.getItem("role") === "admin"){
+  document.getElementById("admin-events").hidden = false;
+  document.getElementById("admin-data").hidden = false;
 }
 </script>
 
