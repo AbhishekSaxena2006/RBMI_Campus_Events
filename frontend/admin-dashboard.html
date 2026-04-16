@@ -1,36 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Registrations</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrations - RBMI</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
-<h2 style="text-align:center;">All Registrations</h2>
+<header>
+  <div class="brand-wrap">
+    <img src="../assets/images/logo.png">
+    <h2>RBMI Campus Events</h2>
+  </div>
 
-<table border="1" width="100%" id="table">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Event</th>
-  </tr>
-</table>
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./events.html">Events</a>
+    <a href="./about.html">About</a>
+
+    <a id="admin-events" href="admin-events.html">Manage Events</a>
+    <a id="admin-data" href="admin-dashboard.html">View Registrations</a>
+
+    <a id="nav-sign" href="./signup.html">Sign Up</a>
+    <a id="nav-login" href="./login.html">Login</a>
+  </nav>
+</header>
+
+<div class="top-accent"></div>
+
+<section class="content">
+
+  <div class="form-card">
+    <h2 style="text-align:center;">All Registrations</h2>
+
+    <div style="overflow-x:auto;">
+      <table id="table" style="width:100%; border-collapse:collapse;">
+        <thead>
+          <tr style="background:#0a3d62; color:white;">
+            <th style="padding:10px;">Name</th>
+            <th style="padding:10px;">Email</th>
+            <th style="padding:10px;">Phone</th>
+            <th style="padding:10px;">Event</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</section>
+
+<footer>© 2025 RBMI | Campus Events Portal</footer>
 
 <script>
 async function loadData() {
   const res = await fetch("http://127.0.0.1:5000/get-registrations");
   const data = await res.json();
 
-  const table = document.getElementById("table");
+  const tbody = document.querySelector("#table tbody");
+  tbody.innerHTML = "";
 
   data.forEach(item => {
-    table.innerHTML += `
-      <tr>
-        <td>${item[1]}</td>
-        <td>${item[2]}</td>
-        <td>${item[3]}</td>
-        <td>${item[4]}</td>
+    tbody.innerHTML += `
+      <tr style="text-align:center; border-bottom:1px solid #ccc;">
+        <td style="padding:8px;">${item[1]}</td>
+        <td style="padding:8px;">${item[2]}</td>
+        <td style="padding:8px;">${item[3]}</td>
+        <td style="padding:8px;">${item[4]}</td>
       </tr>
     `;
   });
@@ -38,6 +76,8 @@ async function loadData() {
 
 loadData();
 </script>
+
+<script src="../assets/js/auth.js"></script>
 
 </body>
 </html>

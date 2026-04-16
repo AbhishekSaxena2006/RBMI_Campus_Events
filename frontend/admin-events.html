@@ -1,33 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Manage Events</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Events - RBMI</title>
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
 
-<h2 style="text-align:center;">Add Event</h2>
+<header>
+  <div class="brand-wrap">
+    <img src="../assets/images/logo.png">
+    <h2>RBMI Campus Events</h2>
+  </div>
 
-<div style="width:300px; margin:auto;">
-  <input id="eventName" placeholder="Event Name"><br><br>
-  <input id="eventDesc" placeholder="Description"><br><br>
-  <button onclick="addEvent()">Add Event</button>
-</div>
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./events.html">Events</a>
+    <a href="./about.html">About</a>
+
+    <a id="admin-events" href="admin-events.html">Manage Events</a>
+    <a id="admin-data" href="admin-dashboard.html">View Registrations</a>
+
+    <a id="nav-sign" href="./signup.html">Sign Up</a>
+    <a id="nav-login" href="./login.html">Login</a>
+  </nav>
+</header>
+
+<div class="top-accent"></div>
+
+<section class="content">
+
+  <!-- 🔥 ADD EVENT -->
+  <div class="form-card">
+    <h2 style="text-align:center;">Add New Event</h2>
+
+    <input id="eventName" placeholder="Event Name">
+    <input id="eventDesc" placeholder="Event Description">
+
+    <button onclick="addEvent()">Add Event</button>
+  </div>
+
+  <!-- 🔥 ALL EVENTS -->
+  <div class="form-card" style="margin-top:20px;">
+    <h2 style="text-align:center;">All Events</h2>
+
+    <div id="eventList"></div>
+  </div>
+
+</section>
+
+<footer>© 2025 RBMI | Campus Events Portal</footer>
 
 <script>
+async function loadEvents(){
+  const res = await fetch("http://127.0.0.1:5000/get-events");
+  const data = await res.json();
+
+  const list = document.getElementById("eventList");
+  list.innerHTML = "";
+
+  data.forEach(e=>{
+    list.innerHTML += `
+      <div style="margin-bottom:10px; padding:10px; border:1px solid #ccc; border-radius:8px;">
+        <strong>${e[1]}</strong> <br>
+        ${e[2]} <br><br>
+        <button onclick="deleteEvent(${e[0]})">Delete</button>
+      </div>
+    `;
+  });
+}
+
 async function addEvent(){
   const name = document.getElementById("eventName").value;
   const description = document.getElementById("eventDesc").value;
 
-  await fetch("http://127.0.0.1:5000/add-event", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ name, description })
+  await fetch("http://127.0.0.1:5000/add-event",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({name,description})
   });
 
   alert("Event Added");
+  loadEvents();
 }
+
+async function deleteEvent(id){
+  await fetch(`http://127.0.0.1:5000/delete-event/${id}`,{
+    method:"DELETE"
+  });
+
+  loadEvents();
+}
+
+loadEvents();
 </script>
+
+<script src="../assets/js/auth.js"></script>
 
 </body>
 </html>
