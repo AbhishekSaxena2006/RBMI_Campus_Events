@@ -5,7 +5,7 @@ import sqlite3
 app = Flask(__name__)
 CORS(app)
 
-# ---------- DB ----------
+# ---------- DB -----------
 def init_db():
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
