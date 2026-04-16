@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Login - RBMI Events</title>
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
 
   <style>
     .eye-btn {
@@ -27,7 +27,7 @@
 
 <header>
   <div class="brand-wrap">
-    <img src="./assets/images/logo.png" alt="Logo">
+    <img src="../assets/images/logo.png" alt="Logo">
     <h2>RBMI Campus Events</h2>
   </div>
   <nav>
@@ -46,15 +46,11 @@
     <h2 style="text-align:center;">Login to Your Account</h2>
 
     <form id="loginForm">
-<!----email-->
-      <label for="emailL">Email</label>
-<input id="emailL" type="email" required />
-<small id="emailErrorL" style="color:#c62828; display:none;">
-  Allowed domains: gmail.com, rbmi.in, rbmi.com, outlook.com
-</small>
 
+      <label>Email</label>
+      <input id="emailL" type="email" required />
 
-      <label for="pwdL">Password</label>
+      <label>Password</label>
       <div class="input-wrap">
         <input id="pwdL" type="password" required />
         <span class="eye-btn" onclick="togglePwd('pwdL', this)">👁</span>
@@ -71,6 +67,40 @@
 
 <footer>© 2025 RBMI | Campus Events Portal</footer>
 
+<!-- 🔥 LOGIN SCRIPT (BACKEND CONNECTED) -->
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("emailL").value;
+  const password = document.getElementById("pwdL").value;
+
+  try {
+    const res = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const result = await res.json();
+
+    if (result.role === "admin") {
+      localStorage.setItem("role", "admin");
+      window.location.href = "admin.html";
+    } else {
+      document.getElementById("loginMsg").textContent = "Invalid Credentials";
+    }
+
+  } catch (err) {
+    console.log(err);
+    document.getElementById("loginMsg").textContent = "Server Error";
+  }
+});
+</script>
+
+<!-- 🔥 PASSWORD SHOW/HIDE -->
 <script>
 function togglePwd(id, eye){
     const field = document.getElementById(id);
@@ -84,6 +114,5 @@ function togglePwd(id, eye){
 }
 </script>
 
-<script src="./assets/js/auth.js"></script>
 </body>
 </html>

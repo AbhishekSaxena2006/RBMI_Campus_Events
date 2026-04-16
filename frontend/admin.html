@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<script>
+if(localStorage.getItem("role") !== "admin"){
+  alert("Access Denied");
+  window.location.href = "login.html";
+}
+</script>
+
+<header>
+  <div class="brand-wrap">
+    <img src="../assets/images/logo.png">
+    <h2>Admin Panel</h2>
+  </div>
+
+  <button onclick="logout()" style="margin-right:20px;">Logout</button>
+</header>
+
+<div class="top-accent"></div>
+
+<section class="content">
+
+  <div class="form-card">
+
+    <h3>Add Event</h3>
+    <input id="eventName" placeholder="Event Name">
+    <input id="eventDesc" placeholder="Description">
+    <button onclick="addEvent()">Add Event</button>
+
+    <h2 style="text-align:center;">Event Registrations</h2>
+
+    <table border="1" width="100%" id="table">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Event</th>
+      </tr>
+    </table>
+
+  </div>
+
+</section>
+
+<script>
+async function loadData() {
+  const res = await fetch("http://127.0.0.1:5000/get-registrations");
+  const data = await res.json();
+
+  const table = document.getElementById("table");
+
+  data.forEach(item => {
+    table.innerHTML += `
+      <tr>
+        <td>${item[1]}</td>
+        <td>${item[2]}</td>
+        <td>${item[3]}</td>
+        <td>${item[4]}</td>
+      </tr>`;
+  });
+}
+
+async function addEvent(){
+  const name = document.getElementById("eventName").value;
+  const description = document.getElementById("eventDesc").value;
+
+  await fetch("http://127.0.0.1:5000/add-event", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ name, description })
+  });
+
+  alert("Event Added");
+}
+
+function logout(){
+  localStorage.removeItem("role");
+  window.location.href = "login.html";
+}
+
+loadData();
+</script>
+
+</body>
+</html>

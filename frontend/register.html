@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register - RBMI Events</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+
+<body>
+
+<header>
+  <div class="brand-wrap">
+    <img src="../assets/images/logo.png" alt="Logo">
+    <h2>RBMI Campus Events</h2>
+  </div>
+
+  <nav>
+      <a href="./index.html">Home</a>
+      <a href="./events.html">Events</a>
+      <a href="./about.html">About</a>
+      <a id="nav-sign" href="./signup.html">Sign Up</a>
+      <a id="nav-login" href="./login.html">Login</a>
+  </nav>
+</header>
+
+<div class="top-accent"></div>
+
+<section class="content">
+
+  <!-- 🔥 SAME CARD AS LOGIN -->
+  <div class="form-card">
+    <h2 style="text-align:center;">Event Registration</h2>
+
+    <form id="form">
+
+      <label>Name</label>
+      <input id="name" type="text" required />
+
+      <label>Email</label>
+      <input id="email" type="email" required />
+
+      <label>Phone</label>
+      <input id="phone" type="text" required />
+
+      <label>Event</label>
+      <input id="event" readonly />
+
+      <button type="submit">Register</button>
+
+      <p id="msg" style="color:green; margin-top:10px;"></p>
+
+    </form>
+  </div>
+
+</section>
+
+<footer>© 2025 RBMI | Campus Events Portal</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("event").value = params.get("event");
+
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const event = document.getElementById("event").value;
+
+  const data = { name, email, phone, event };
+
+  try {
+    const res = await fetch("http://127.0.0.1:5000/register-event", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    document.getElementById("msg").textContent = result.message;
+
+  } catch (err) {
+    document.getElementById("msg").textContent = "Error aa gaya";
+  }
+});
+</script>
+
+</body>
+</html>
