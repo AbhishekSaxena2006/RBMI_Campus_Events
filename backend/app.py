@@ -164,6 +164,6 @@ def delete_event(id):
     return jsonify({"message": "Event deleted"})
 
 
-# ---------- RUN ----------
+# ---------- RUN -----------
 if __name__ == "__main__":
     app.run(debug=True)
