@@ -74,7 +74,7 @@
 <section class="content">
   <h2>Upcoming Events</h2>
 
-  <!-- 🔥 EMPTY (dynamic load hoga) -->
+  <!--  EMPTY (dynamic load hoga) -->
   <div class="event-grid"></div>
 
 </section>
@@ -88,7 +88,7 @@ function goToRegister(eventName) {
   window.location.href = "register.html?event=" + encodeURIComponent(eventName);
 }
 
-// 🔥 DYNAMIC EVENTS LOAD
+//  DYNAMIC EVENTS LOAD
 async function loadEvents(){
   const res = await fetch("http://127.0.0.1:5000/get-events");
   const data = await res.json();

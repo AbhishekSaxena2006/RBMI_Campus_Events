@@ -89,12 +89,12 @@ document.getElementById("loginForm").addEventListener("submit", async (e)=>{
 
   if(res.status === 200){
 
-    // 🔥 store user
+    //  store user
     localStorage.setItem("rbmi_current_user", JSON.stringify({
       name: email
     }));
 
-    // 🔥 admin check
+    //  admin check
     if(email === "admin@gmail.com"){
       localStorage.setItem("role","admin");
     } else {
